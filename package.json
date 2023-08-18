@@ -11,6 +11,10 @@
   "devDependencies": {
     "@nuxt/devtools": "latest",
     "@types/node": "^18.17.3",
-    "nuxt": "^3.6.5"
+    "nuxt": "^3.6.5",
+    "nuxt-windicss": "^2.6.1"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1"
   }
 }
