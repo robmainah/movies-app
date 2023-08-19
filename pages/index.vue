@@ -2,11 +2,15 @@
 import { IApiResponse } from 'types/ApiResponse';
 
 const searchTerm = ref<string>("");
+const page = ref(1);
+
+const disablePrevious = computed(() => page.value === 1);
+const disableNext = computed(() => page.value + 1 === data.value?.total_pages);
 
 const debouncedSearchTerm = refDebounced(searchTerm, 700);
 
 const url = computed(() => {
-  return `api/movies/search?query=${debouncedSearchTerm.value}`;
+  return `api/movies/search?query=${debouncedSearchTerm.value}&page=${page.value}`;
 });
 
 const { data } = await useFetch<IApiResponse>(url);
@@ -26,6 +30,11 @@ const { data } = await useFetch<IApiResponse>(url);
         <div v-for="(movie, index) in data?.results" :key="index">
           <MovieCard :movie="movie" />
         </div>
+      </div>
+      <div class="flex justify-center" v-if="data?.results.length">
+        <button v-if="!disablePrevious" @click="page--" class="px-4 py-2 text-m borer rounded-lg">Previous</button>
+        <button class="px-4 py-2 text-m borer rounded-lg">{{ page }}</button>
+        <button v-if="!disableNext" @click="page++" class="px-4 py-2 text-m borer rounded-lg">Next</button>
       </div>
     </div>
   </div>
