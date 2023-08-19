@@ -11,7 +11,7 @@ const imgUrl = computed(() => props.movie.poster_path != null ? `${config.public
 </script>
 
 <template>
-  <div class="h-128 w-64 border flex flex-col text-center">
+  <NuxtLink :to="`/movies/${movie.id}`" class="h-128 w-64 border flex flex-col text-center">
     <div class="mb-5 bg-green-600 inline-block">
       <img class="transform hover:translate-x-3 hover:-translate-y-3 delay-50 duration-100 inline-block" :src="imgUrl" />
     </div>
@@ -21,5 +21,5 @@ const imgUrl = computed(() => props.movie.poster_path != null ? `${config.public
     <p class="text-m text-gray-500 break-words text-wrap truncate overflow-hidden px-2">
       {{ movie.overview }}
     </p>
-  </div>
+  </NuxtLink>
 </template>
